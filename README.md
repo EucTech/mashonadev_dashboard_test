@@ -1,3 +1,12 @@
+# MASHONADEV FRONTEND DASHBOARD TEST
+
+### Interview Technical Test
+
+## Frontend Technologies
+1. Next JS
+2. Tailwind CSS
+3. TypeScript
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
