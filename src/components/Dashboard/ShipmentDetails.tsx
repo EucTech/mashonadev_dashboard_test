@@ -16,7 +16,7 @@ const ShipmentDetails = () => {
   
 
   const deliveryStatus = (status: string) => {
-    const statusClasses: any = {
+    const statusClasses: Record<string, string> = {
       "In-Transit": "text-[#CB854B] bg-[#FFEAD9]",
       "Pending": "text-[#11BB16] bg-[#D0FBD2]",
       "Delivered": "text-white bg-[#06D001]",
@@ -40,7 +40,7 @@ const ShipmentDetails = () => {
         return (
           
           <div key={index} className="w-full group flex flex-col  mt-2 rounded-[8px] bg-[#FFFFFF] px-[24px] py-[20px] border border-[#DBD7D7]">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-[#DBD7D7]/30 pb-4 w-full">
+            <div onClick={() => toggleOpen(index)} className="flex flex-col md:flex-row items-start md:items-center cursor-pointer justify-between border-b border-[#DBD7D7]/30 pb-4 w-full">
               <div className="flex flex-col md:flex-row items-start gap-6 md:gap-20">
                 <div className="flex flex-col items-start gap-1">
                   <p className="text-[#808080] text-[12px] font-[400]">
@@ -71,7 +71,7 @@ const ShipmentDetails = () => {
               </div>
 
               <MdOutlineKeyboardArrowDown
-                onClick={() => toggleOpen(index)}
+                // onClick={() => toggleOpen(index)}
                 className={`text-[#003701] text-[28px] mt-4 md:mt-0 cursor-pointer transition-transform duration-500 ${
                   isOpen ? "rotate-180" : "rotate-0"
                 }`}

@@ -60,7 +60,7 @@ const Sidebar = () => {
         <button
           onClick={handleToggle}
           className={classNames(
-            "p-2 bg-[#262A48] rounded-full transition-transform duration-300",
+            "p-2 bg-[#262A48] rounded-full cursor-pointer transition-transform duration-300",
             // { "rotate-180": isCollapsed }
           )}
         >
