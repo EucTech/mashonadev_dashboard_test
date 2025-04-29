@@ -1,21 +1,14 @@
-// import React from 'react'
-import { Circles, ThreeDots } from 'react-loader-spinner'
-
+import React from 'react'
+import { ClipLoader } from 'react-spinners'
 
 const Spinner = () => {
   return (
     <div>
-      <ThreeDots
-  visible={true}
-  height="80"
-  width="80"
-  color="#E89578"
-  radius="9"
-  ariaLabel="three-dots-loading"
-  wrapperStyle={{}}
-  wrapperClass=""
-  />
-    {/* <p >Loading...</p>  */}
+      <ClipLoader
+        size={80}
+        color="#E89578"
+        loading={true}
+      />
     </div>
   )
 }
