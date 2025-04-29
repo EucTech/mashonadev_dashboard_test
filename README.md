@@ -6,6 +6,7 @@
 1. Next JS
 2. Tailwind CSS
 3. TypeScript
+4. Shadcn
 
 
 ## Getting Started
