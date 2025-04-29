@@ -1,97 +1,127 @@
-'use client';
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
-  Tooltip,
-  ResponsiveContainer,
   CartesianGrid,
-  Area,
-  AreaChart,
-} from 'recharts';
+  Tooltip,
+} from "recharts";
 
-const RecentShipment = () => {
-    const [selectedTab, setSelectedTab] = useState('Year');
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Manrope } from "next/font/google";
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+const CompanyGrowthChart = () => {
+  const [selectedTab, setSelectedTab] = useState("Year");
+  const tabs = ["Year", "Month", "Week"];
 
   const data = [
-    { name: '1', value: 300 },
-    { name: '2', value: 320 },
-    { name: '3', value: 330 },
-    { name: '4', value: 340 },
-    { name: '5', value: 350 },
-    { name: '6', value: 400 },
-    { name: '7', value: 390 },
-    { name: '8', value: 500 },
-    { name: '9', value: 600 },
-    { name: '10', value: 550 },
-    { name: '11', value: 200 },
-    { name: '12', value: 1000 },
+    { name: "1", value: 250 },
+    { name: "2", value: 350 },
+    { name: "3", value: 300 },
+    { name: "4", value: 380 },
+    { name: "5", value: 350 },
+    { name: "6", value: 450 },
+    { name: "7", value: 350 },
+    { name: "8", value: 530 },
+    { name: "9", value: 380 },
+    { name: "10", value: 650 },
+    { name: "11", value: 200 },
+    { name: "12", value: 1000 },
   ];
 
-  const tabs = ['Year', 'Month', 'Week'];
-
   return (
-    <div className="w-full flex flex-col gap-5 mt-10">
+    <div className="w-full flex flex-col mt-10">
       <div className="w-full flex items-center justify-between">
         <h2 className="text-[#171717] font-[500] text-[24px]">
           Recent shipment
         </h2>
 
-        <div className="w-fit flex items-center justify-between gap-3 text-[14px] font-[500] bg-[#FFFFFF] text-[#737373] rounded-[8px] py-[8px] px-[12px] border border-[#E5E5E5] ">
+        <div className="w-fit flex items-center justify-between gap-3 text-[14px] font-[500] bg-[#FFFFFF] text-[#737373] rounded-[8px] py-[6px] px-[12px] border border-[#E5E5E5] ">
           <p>See All</p>
         </div>
       </div>
+      <Card
+        className={`w-full rounded-xl border bg-white p-4 mt-5 ${manrope.className}`}
+      >
+        <CardHeader className="flex flex-col gap-8 sm:flex-row items-start sm:items-center justify-between p-2 mb-4">
+          <CardTitle className="text-[18px] font-[600] text-[#1D2939]">
+            Company Growth
+          </CardTitle>
 
-      <div className="bg-[#F9FAFB] p-4 rounded-[12px]">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-[14px] font-medium text-[#171717]">Company Growth</h3>
-          <div className="flex space-x-2 bg-white p-1 rounded-[8px]">
+          <ToggleGroup
+            type="single"
+            value={selectedTab}
+            onValueChange={(val) => val && setSelectedTab(val)}
+            className="bg-[#F2F4F7] p-1 rounded-[8px]"
+          >
             {tabs.map((tab) => (
-              <button
+              <ToggleGroupItem
                 key={tab}
-                className={`px-3 py-1 text-[12px] rounded-[6px] ${
+                value={tab}
+                className={`px-6 py-1 text-[14px] rounded-[8px] ${
                   selectedTab === tab
-                    ? 'bg-[#171717] text-white'
-                    : 'text-gray-500 hover:bg-gray-100'
+                    ? "!bg-[#FFFFFF] shadow-sm !text-[#1D2939]"
+                    : "text-[#1D2939]"
                 }`}
-                onClick={() => setSelectedTab(tab)}
               >
                 {tab}
-              </button>
+              </ToggleGroupItem>
             ))}
-          </div>
-        </div>
+          </ToggleGroup>
+        </CardHeader>
 
-        <ResponsiveContainer width="100%" height={250}>
-          <AreaChart data={data}>
-            {/* This is where we define the gradient */}
-            <defs>
-              <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#5A65AB" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#5A65AB" stopOpacity={0} />
-              </linearGradient>
-            </defs>
+        <CardContent className="p-2">
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={data}>
+              <defs>
+                <linearGradient id="areaColor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#5A65AB" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#5A65AB" stopOpacity={0} />
+                </linearGradient>
+              </defs>
 
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-
-            {/* Line with gradient fill under it */}
-            <Area
-              type="monotone"
-              dataKey="value"
-              stroke="#5A65AB"
-              fill="url(#colorValue)"
-              strokeWidth={2}
-              dot={false}
-              activeDot={{ r: 6 }}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <XAxis
+                dataKey="name"
+                tickLine={false}
+                axisLine={{ stroke: "#98A2B3", strokeDasharray: "0" }}
+                className="text-[12px] text-[#98A2B3] font-[400]"
+              />
+              <YAxis
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(value) => `${value}`}
+                ticks={[0, 200, 400, 600, 800, 1000]}
+                className="text-[12px] text-[#98A2B3] font-[400] "
+              />
+              <Tooltip
+                contentStyle={{ backgroundColor: "white", borderRadius: 8 }}
+                cursor={{ stroke: "#E0E7FF", strokeWidth: 1 }}
+              />
+              <Area
+                type="monotone"
+                dataKey="value"
+                stroke="#5A65AB"
+                fill="url(#areaColor)"
+                strokeWidth={2}
+                dot={false}
+                activeDot={{ r: 5 }}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
     </div>
   );
 };
 
-export default RecentShipment;
+export default CompanyGrowthChart;
